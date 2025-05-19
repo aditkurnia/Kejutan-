@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Kejutan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        button:hover {
+            background-color: #e64a19;
+            transform: scale(1.05);
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <h1>Kamu akan mendapatkan kejutan</h1>
+    <button id="surpriseButton">Klik Disini</button>
+    
+    <audio id="music" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js"></audio>
+    
+    <script>
+        document.getElementById('surpriseButton').addEventListener('click', function() {
+            // Buat elemen audio baru karena CDN link tidak langsung ke file audio
+            const audio = new Audio();
+            // URL ke file audio (contoh menggunakan file audio publik)
+            audio.src = "Bukan prank desah.mp3";
+            audio.volume = 1.0; // Volume maksimum (0.0 sampai 1.0)
+            
+            // Coba mulai pemutaran
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Pemutaran berhasil dimulai
+                    console.log("Musik mulai diputar");
+                })
+                .catch(error => {
+                    // Pemutaran gagal - mungkin karena kebijakan browser
+                    console.error("Pemutaran otomatis diblokir oleh browser:", error);
+                    alert("Untuk mendengarkan musik, harap izinkan autoplay di browser Anda");
+                });
+            }
+        });
+    </script>
+</body>
+</html>
